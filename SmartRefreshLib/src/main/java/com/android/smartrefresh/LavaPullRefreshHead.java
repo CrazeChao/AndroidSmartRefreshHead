@@ -9,7 +9,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -45,10 +44,8 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
     protected long mStartTime = 0;
     protected boolean mIsStarted = false;
     protected long mLastDragTime;
-
     protected TimeInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
     //</editor-fold>
-
     //<editor-fold desc="构造方法">
     public LavaPullRefreshHead(Context context) {
         this(context, null);
@@ -270,8 +267,6 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
     @Override
     public void onMoving(boolean isDragging, float percent, int offset, int height, int maxDragHeight) {
         super.onMoving(isDragging, percent, offset, height, maxDragHeight);
-        Log.e("onMoving","isDragging: "+isDragging+" percent: "+percent+" offset: "+offset+" height: "+height+" maxDragHeight: "+maxDragHeight);
-        //把移动数据添加到时间上
         if (mStartTime == -1){
             mStartTime = System.currentTimeMillis();
         }
