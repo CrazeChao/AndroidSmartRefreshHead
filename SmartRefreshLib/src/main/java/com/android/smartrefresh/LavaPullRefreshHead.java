@@ -91,7 +91,7 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
     int mPointInterval = 38;//38
     int mMaxExtrude = 10; //10
     long repeatTime = 600;//600
-    float mPaddingVertical = 60;//60
+    float mPaddingVertical = 10;//60
 
     private Queue<Ramen> remins = new LinkedList<>();
     /**
