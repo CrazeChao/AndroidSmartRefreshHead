@@ -4,6 +4,9 @@
         <attr name="srlClassicsSpinnerStyle" />
         <attr name="srlAnimatingColor" format="color"/>
         <attr name="srlNormalColor" format="color"/>
+        <attr name="srlAnimatingTopPadding" format="dimension"/>
+        <attr name="srlAnimatingBottomPadding" format="dimension"/>
+        <attr name="srlAnimatingHeight" format="dimension"/>
     </declare-styleable>
 
 </resources>

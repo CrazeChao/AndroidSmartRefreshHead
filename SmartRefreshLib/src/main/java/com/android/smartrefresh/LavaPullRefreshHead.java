@@ -38,21 +38,13 @@ import static com.scwang.smart.refresh.layout.constant.RefreshState.Refreshing;
 public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeader {
     protected boolean mManualNormalColor;
     protected boolean mManualAnimationColor;
-
     protected Paint mPaint;
-
     protected int mNormalColor = 0xffeeeeee;
     protected int mAnimatingColor = 0xffe75946;
-
     protected float mCircleSpacing;
-
-
     protected long mStartTime = 0;
     protected boolean mIsStarted = false;
-
     protected long mLastDragTime;
-
-
 
     protected TimeInterpolator mInterpolator = new AccelerateDecelerateInterpolator();
     //</editor-fold>
@@ -80,10 +72,27 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
         if (ta.hasValue(R.styleable.BallPulseFooter_srlAnimatingColor)) {
             setAnimatingColor(ta.getColor(R.styleable.BallPulseFooter_srlAnimatingColor, 0));
         }
-
+        if (ta.hasValue(R.styleable.BallPulseFooter_srlAnimatingBottomPadding)){
+           mPaddingBottom =  ta.getDimensionPixelSize(R.styleable.BallPulseFooter_srlAnimatingBottomPadding,0);
+        }
+        if (ta.hasValue(R.styleable.BallPulseFooter_srlAnimatingTopPadding)){
+           mPaddingTop = ta.getDimensionPixelSize(R.styleable.BallPulseFooter_srlAnimatingTopPadding,0);
+        }
+        if (ta.hasValue(R.styleable.BallPulseFooter_srlAnimatingHeight)){
+            int animHeight = ta.getDimensionPixelSize(R.styleable.BallPulseFooter_srlAnimatingHeight,0);
+            viewHeight = (int)(animHeight+mPaddingTop+mPaddingBottom);
+        }
         ta.recycle();
         mCircleSpacing = SmartUtil.dp2px(4);
     }
+    private int viewHeight;
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        getLayoutParams().height = viewHeight;
+    }
+
     /**
      * 点的数量
      * */
@@ -91,7 +100,20 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
     int mPointInterval = 38;//38
     int mMaxExtrude = 10; //10
     long repeatTime = 600;//600
-    float mPaddingVertical = 10;//60
+    /**
+     * 暴露参数
+     *
+     * 动画 顶部padding
+     * */
+    float mPaddingTop;
+
+    /**
+     * 暴露参数
+     * 动画 底部padding
+     * */
+    float mPaddingBottom;
+
+    float mCircleRadius = 10;
 
     private Queue<Ramen> remins = new LinkedList<>();
     /**
@@ -105,7 +127,7 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
         int width = mPointInterval*mNumberOfPoints;
         int left = (w-width)/2;
         for (int i = 0; i < mNumberOfPoints; i++) {
-            remins.add(new Ramen((i*mPointInterval)+left+10,10,mPaddingVertical,h-mPaddingVertical,mMaxExtrude));
+            remins.add(new Ramen((i*mPointInterval)+left+mCircleRadius,mCircleRadius,mPaddingTop+mCircleRadius,h-(mPaddingBottom+mCircleRadius),mMaxExtrude));
         }
     }
 

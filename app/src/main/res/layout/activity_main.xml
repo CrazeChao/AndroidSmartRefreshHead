@@ -14,10 +14,15 @@
         app:srlAccentColor="@color/white"
         app:srlEnableLoadMore="true"
         app:srlEnableAutoLoadMore="false"
-        app:srlEnablePreviewInEditMode="true">
+        app:srlEnablePreviewInEditMode="true"
+        >
         <com.android.smartrefresh.LavaPullRefreshHead
             android:layout_width="match_parent"
-            android:layout_height="160px"/>
+            android:layout_height="0px"
+            app:srlAnimatingTopPadding="0px"
+            app:srlAnimatingBottomPadding="0px"
+            app:srlAnimatingHeight="40px"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
