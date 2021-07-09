@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
@@ -251,12 +252,13 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
     @Override
     public void computeScroll() {
         super.computeScroll();
-        float y =  getTranslationY();
-        if (y >getHeight()&& (mGlobalState == RefreshReleased|| mGlobalState == Refreshing)){
-            setHeightCompensation((getHeight()-y));
+        if (Math.abs(getTranslationY()) > getHeight()&& (mGlobalState == RefreshReleased|| mGlobalState == Refreshing)){
+            float diff = Math.abs(getTranslationY()) - getHeight();
+            setHeightCompensation(getTranslationY()>0? -diff:diff);
             this.postInvalidateOnAnimation();
         }
     }
+
 
     @Override
     public void onReleased(@NonNull RefreshLayout refreshLayout, int height, int maxDragHeight) {
@@ -272,7 +274,9 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
         }
         if (isDragging){
             compensationForMissingTime();
-            if (offset > height)setHeightCompensation((height-offset));
+            Log.e("onMoving",getTranslationY()+"");
+            float diff = Math.abs(getTranslationY()) - getHeight();
+            if (offset > height) setHeightCompensation(getTranslationY()>0? -diff:diff);
             if (offset<=height)setHeightCompensation(0);
             mLastDragTime = System.currentTimeMillis();
             this.invalidate();
