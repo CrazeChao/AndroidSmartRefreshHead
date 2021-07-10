@@ -12,25 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlAccentColor="@color/white"
-        app:srlEnableAutoLoadMore="false"
-        app:srlEnableLoadMore="true"
-        app:srlEnablePreviewInEditMode="true"
         app:srlPrimaryColor="@color/white"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="194dp">
+        app:srlEnableRefresh="false"
+        app:srlEnableAutoLoadMore="false"
 
-        <com.android.smartrefresh.LavaPullRefreshHead
-            android:layout_width="match_parent"
-            android:layout_height="0px"
-            app:srlAnimatingBottomPadding="60px"
-            app:srlAnimatingHeight="40px"
-            app:srlAnimatingTopPadding="60px" />
+     >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black" />
         <com.android.smartrefresh.LavaPullRefreshHead
+            android:id="@+id/loadMore"
             android:layout_width="match_parent"
             android:layout_height="0px"
             app:srlAnimatingBottomPadding="60px"

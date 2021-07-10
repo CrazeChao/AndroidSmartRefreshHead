@@ -274,7 +274,6 @@ public class LavaPullRefreshHead extends SimpleComponent implements RefreshHeade
         }
         if (isDragging){
             compensationForMissingTime();
-            Log.e("onMoving",getTranslationY()+"");
             float diff = Math.abs(getTranslationY()) - getHeight();
             if (offset > height) setHeightCompensation(getTranslationY()>0? -diff:diff);
             if (offset<=height)setHeightCompensation(0);
